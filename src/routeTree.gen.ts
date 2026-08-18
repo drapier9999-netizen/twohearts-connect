@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as HomeRouteImport } from './routes/home'
+import { Route as MemoriesRouteImport } from './routes/memories'
 import { Route as UsRouteImport } from './routes/us'
 import { Route as WelcomeRouteImport } from './routes/welcome'
 
@@ -22,6 +23,11 @@ const IndexRoute = IndexRouteImport.update({
 const HomeRoute = HomeRouteImport.update({
   id: '/home',
   path: '/home',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MemoriesRoute = MemoriesRouteImport.update({
+  id: '/memories',
+  path: '/memories',
   getParentRoute: () => rootRouteImport,
 } as any)
 const UsRoute = UsRouteImport.update({
@@ -38,12 +44,14 @@ const WelcomeRoute = WelcomeRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/home': typeof HomeRoute
+  '/memories': typeof MemoriesRoute
   '/us': typeof UsRoute
   '/welcome': typeof WelcomeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/home': typeof HomeRoute
+  '/memories': typeof MemoriesRoute
   '/us': typeof UsRoute
   '/welcome': typeof WelcomeRoute
 }
@@ -51,20 +59,22 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/home': typeof HomeRoute
+  '/memories': typeof MemoriesRoute
   '/us': typeof UsRoute
   '/welcome': typeof WelcomeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/home' | '/us' | '/welcome'
+  fullPaths: '/' | '/home' | '/memories' | '/us' | '/welcome'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/home' | '/us' | '/welcome'
-  id: '__root__' | '/' | '/home' | '/us' | '/welcome'
+  to: '/' | '/home' | '/memories' | '/us' | '/welcome'
+  id: '__root__' | '/' | '/home' | '/memories' | '/us' | '/welcome'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   HomeRoute: typeof HomeRoute
+  MemoriesRoute: typeof MemoriesRoute
   UsRoute: typeof UsRoute
   WelcomeRoute: typeof WelcomeRoute
 }
@@ -83,6 +93,13 @@ declare module '@tanstack/react-router' {
       path: '/home'
       fullPath: '/home'
       preLoaderRoute: typeof HomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/memories': {
+      id: '/memories'
+      path: '/memories'
+      fullPath: '/memories'
+      preLoaderRoute: typeof MemoriesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/us': {
@@ -105,6 +122,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   HomeRoute: HomeRoute,
+  MemoriesRoute: MemoriesRoute,
   UsRoute: UsRoute,
   WelcomeRoute: WelcomeRoute,
 }

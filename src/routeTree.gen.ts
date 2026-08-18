@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as HomeRouteImport } from './routes/home'
 import { Route as MemoriesRouteImport } from './routes/memories'
 import { Route as NotesRouteImport } from './routes/notes'
+import { Route as RemindersRouteImport } from './routes/reminders'
 import { Route as UsRouteImport } from './routes/us'
 import { Route as WelcomeRouteImport } from './routes/welcome'
 
@@ -36,6 +37,11 @@ const NotesRoute = NotesRouteImport.update({
   path: '/notes',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RemindersRoute = RemindersRouteImport.update({
+  id: '/reminders',
+  path: '/reminders',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const UsRoute = UsRouteImport.update({
   id: '/us',
   path: '/us',
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/home': typeof HomeRoute
   '/memories': typeof MemoriesRoute
   '/notes': typeof NotesRoute
+  '/reminders': typeof RemindersRoute
   '/us': typeof UsRoute
   '/welcome': typeof WelcomeRoute
 }
@@ -60,6 +67,7 @@ export interface FileRoutesByTo {
   '/home': typeof HomeRoute
   '/memories': typeof MemoriesRoute
   '/notes': typeof NotesRoute
+  '/reminders': typeof RemindersRoute
   '/us': typeof UsRoute
   '/welcome': typeof WelcomeRoute
 }
@@ -69,15 +77,25 @@ export interface FileRoutesById {
   '/home': typeof HomeRoute
   '/memories': typeof MemoriesRoute
   '/notes': typeof NotesRoute
+  '/reminders': typeof RemindersRoute
   '/us': typeof UsRoute
   '/welcome': typeof WelcomeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/home' | '/memories' | '/notes' | '/us' | '/welcome'
+  fullPaths:
+    '/' | '/home' | '/memories' | '/notes' | '/reminders' | '/us' | '/welcome'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/home' | '/memories' | '/notes' | '/us' | '/welcome'
-  id: '__root__' | '/' | '/home' | '/memories' | '/notes' | '/us' | '/welcome'
+  to: '/' | '/home' | '/memories' | '/notes' | '/reminders' | '/us' | '/welcome'
+  id:
+    | '__root__'
+    | '/'
+    | '/home'
+    | '/memories'
+    | '/notes'
+    | '/reminders'
+    | '/us'
+    | '/welcome'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -85,6 +103,7 @@ export interface RootRouteChildren {
   HomeRoute: typeof HomeRoute
   MemoriesRoute: typeof MemoriesRoute
   NotesRoute: typeof NotesRoute
+  RemindersRoute: typeof RemindersRoute
   UsRoute: typeof UsRoute
   WelcomeRoute: typeof WelcomeRoute
 }
@@ -119,6 +138,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NotesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reminders': {
+      id: '/reminders'
+      path: '/reminders'
+      fullPath: '/reminders'
+      preLoaderRoute: typeof RemindersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/us': {
       id: '/us'
       path: '/us'
@@ -141,6 +167,7 @@ const rootRouteChildren: RootRouteChildren = {
   HomeRoute: HomeRoute,
   MemoriesRoute: MemoriesRoute,
   NotesRoute: NotesRoute,
+  RemindersRoute: RemindersRoute,
   UsRoute: UsRoute,
   WelcomeRoute: WelcomeRoute,
 }

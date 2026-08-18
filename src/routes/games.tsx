@@ -34,7 +34,7 @@ function Games() {
               {games.map((game) => (
                 <Card key={game.id} className="p-4">
                   <span className="text-xl">{game.emoji}</span>
-                  <p className="mt-2 font-display text-base leading-tight">{game.name}</p>
+                  <p className="mt-2 font-display text-base leading-tight">{game.title}</p>
                   <p className="mt-1 text-xs text-muted-foreground">{game.blurb}</p>
                   <p className="mt-2 text-[0.65rem] text-muted-foreground">
                     {game.ready ? `${game.players} players` : "Coming soon"}

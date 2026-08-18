@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as GamesRouteImport } from './routes/games'
 import { Route as HomeRouteImport } from './routes/home'
 import { Route as MemoriesRouteImport } from './routes/memories'
+import { Route as MoreRouteImport } from './routes/more'
 import { Route as NotesRouteImport } from './routes/notes'
 import { Route as RemindersRouteImport } from './routes/reminders'
 import { Route as TimelineRouteImport } from './routes/timeline'
@@ -37,6 +38,11 @@ const HomeRoute = HomeRouteImport.update({
 const MemoriesRoute = MemoriesRouteImport.update({
   id: '/memories',
   path: '/memories',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MoreRoute = MoreRouteImport.update({
+  id: '/more',
+  path: '/more',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NotesRoute = NotesRouteImport.update({
@@ -70,6 +76,7 @@ export interface FileRoutesByFullPath {
   '/games': typeof GamesRoute
   '/home': typeof HomeRoute
   '/memories': typeof MemoriesRoute
+  '/more': typeof MoreRoute
   '/notes': typeof NotesRoute
   '/reminders': typeof RemindersRoute
   '/timeline': typeof TimelineRoute
@@ -81,6 +88,7 @@ export interface FileRoutesByTo {
   '/games': typeof GamesRoute
   '/home': typeof HomeRoute
   '/memories': typeof MemoriesRoute
+  '/more': typeof MoreRoute
   '/notes': typeof NotesRoute
   '/reminders': typeof RemindersRoute
   '/timeline': typeof TimelineRoute
@@ -93,6 +101,7 @@ export interface FileRoutesById {
   '/games': typeof GamesRoute
   '/home': typeof HomeRoute
   '/memories': typeof MemoriesRoute
+  '/more': typeof MoreRoute
   '/notes': typeof NotesRoute
   '/reminders': typeof RemindersRoute
   '/timeline': typeof TimelineRoute
@@ -106,6 +115,7 @@ export interface FileRouteTypes {
     | '/games'
     | '/home'
     | '/memories'
+    | '/more'
     | '/notes'
     | '/reminders'
     | '/timeline'
@@ -117,6 +127,7 @@ export interface FileRouteTypes {
     | '/games'
     | '/home'
     | '/memories'
+    | '/more'
     | '/notes'
     | '/reminders'
     | '/timeline'
@@ -128,6 +139,7 @@ export interface FileRouteTypes {
     | '/games'
     | '/home'
     | '/memories'
+    | '/more'
     | '/notes'
     | '/reminders'
     | '/timeline'
@@ -140,6 +152,7 @@ export interface RootRouteChildren {
   GamesRoute: typeof GamesRoute
   HomeRoute: typeof HomeRoute
   MemoriesRoute: typeof MemoriesRoute
+  MoreRoute: typeof MoreRoute
   NotesRoute: typeof NotesRoute
   RemindersRoute: typeof RemindersRoute
   TimelineRoute: typeof TimelineRoute
@@ -175,6 +188,13 @@ declare module '@tanstack/react-router' {
       path: '/memories'
       fullPath: '/memories'
       preLoaderRoute: typeof MemoriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/more': {
+      id: '/more'
+      path: '/more'
+      fullPath: '/more'
+      preLoaderRoute: typeof MoreRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/notes': {
@@ -220,6 +240,7 @@ const rootRouteChildren: RootRouteChildren = {
   GamesRoute: GamesRoute,
   HomeRoute: HomeRoute,
   MemoriesRoute: MemoriesRoute,
+  MoreRoute: MoreRoute,
   NotesRoute: NotesRoute,
   RemindersRoute: RemindersRoute,
   TimelineRoute: TimelineRoute,

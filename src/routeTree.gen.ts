@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as HomeRouteImport } from './routes/home'
 import { Route as MemoriesRouteImport } from './routes/memories'
+import { Route as NotesRouteImport } from './routes/notes'
 import { Route as UsRouteImport } from './routes/us'
 import { Route as WelcomeRouteImport } from './routes/welcome'
 
@@ -30,6 +31,11 @@ const MemoriesRoute = MemoriesRouteImport.update({
   path: '/memories',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NotesRoute = NotesRouteImport.update({
+  id: '/notes',
+  path: '/notes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const UsRoute = UsRouteImport.update({
   id: '/us',
   path: '/us',
@@ -45,6 +51,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/home': typeof HomeRoute
   '/memories': typeof MemoriesRoute
+  '/notes': typeof NotesRoute
   '/us': typeof UsRoute
   '/welcome': typeof WelcomeRoute
 }
@@ -52,6 +59,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/home': typeof HomeRoute
   '/memories': typeof MemoriesRoute
+  '/notes': typeof NotesRoute
   '/us': typeof UsRoute
   '/welcome': typeof WelcomeRoute
 }
@@ -60,21 +68,23 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/home': typeof HomeRoute
   '/memories': typeof MemoriesRoute
+  '/notes': typeof NotesRoute
   '/us': typeof UsRoute
   '/welcome': typeof WelcomeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/home' | '/memories' | '/us' | '/welcome'
+  fullPaths: '/' | '/home' | '/memories' | '/notes' | '/us' | '/welcome'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/home' | '/memories' | '/us' | '/welcome'
-  id: '__root__' | '/' | '/home' | '/memories' | '/us' | '/welcome'
+  to: '/' | '/home' | '/memories' | '/notes' | '/us' | '/welcome'
+  id: '__root__' | '/' | '/home' | '/memories' | '/notes' | '/us' | '/welcome'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   HomeRoute: typeof HomeRoute
   MemoriesRoute: typeof MemoriesRoute
+  NotesRoute: typeof NotesRoute
   UsRoute: typeof UsRoute
   WelcomeRoute: typeof WelcomeRoute
 }
@@ -102,6 +112,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MemoriesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/notes': {
+      id: '/notes'
+      path: '/notes'
+      fullPath: '/notes'
+      preLoaderRoute: typeof NotesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/us': {
       id: '/us'
       path: '/us'
@@ -123,6 +140,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   HomeRoute: HomeRoute,
   MemoriesRoute: MemoriesRoute,
+  NotesRoute: NotesRoute,
   UsRoute: UsRoute,
   WelcomeRoute: WelcomeRoute,
 }
